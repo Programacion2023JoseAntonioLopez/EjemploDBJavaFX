@@ -33,7 +33,7 @@ public class DBConnection {
             CREATE TABLE Departamento (
                 codigo INT AUTO_INCREMENT PRIMARY KEY,
                 nombre VARCHAR(100),
-                jefe INT,
+                jefe INT UNIQUE,
                 FOREIGN KEY (jefe) REFERENCES Persona(id)
                     ON DELETE SET NULL ON UPDATE CASCADE
             );
