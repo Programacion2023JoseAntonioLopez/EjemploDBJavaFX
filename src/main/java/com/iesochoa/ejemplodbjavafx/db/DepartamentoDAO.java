@@ -44,7 +44,7 @@ public class DepartamentoDAO {
     public boolean createDepartamento(Departamento dept) throws SQLException{
         //String sql = "INSERT INTO Departamento (nombre, jefe) VALUES (?, ?)";
 
-            PreparedStatement ps = connection.prepareStatement(INSERT_QUERY, Statement.RETURN_GENERATED_KEYS)) {
+            PreparedStatement ps = connection.prepareStatement(INSERT_QUERY, Statement.RETURN_GENERATED_KEYS);
 
             ps.setString(1, dept.getNombre());
             if (dept.getJefe() != null) {
@@ -59,7 +59,7 @@ public class DepartamentoDAO {
                     if (generatedKeys.next()) {
                         dept.setCodigo(generatedKeys.getInt(1));
                     }
-                }
+
                 return true;
             }
 
