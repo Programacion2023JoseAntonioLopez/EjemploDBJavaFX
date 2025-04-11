@@ -9,7 +9,7 @@ import java.sql.Statement;
 
 public class DBConnection {
     // URL de conexión a la base de datos MySQL
-    private static final String URL ="jdbc:mysql://database-1.c9knttsssyuj.us-east-1.rds.amazonaws.com:3306/mi_DB2"; //"jdbc:mysql://localhost:3366/midb";
+    private static final String URL ="jdbc:mysql://database-1.c9knttsssyuj.us-east-1.rds.amazonaws.com:3306/empresa"; //"jdbc:mysql://localhost:3366/midb";
     private static final String USERNAME = "admin";//"root";
     private static final String PASSWORD = "root123456";
     private static final String CREATE_DB= """
@@ -52,8 +52,8 @@ public class DBConnection {
                     try {
                        // Establecer la conexión
                         connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-                        /*crearTabla(connection);
-                        crearDatosEjemplo();*/
+                        crearTabla(connection);
+                        crearDatosEjemplo();
                     } catch ( SQLException e) {
                         e.printStackTrace();
                     }
