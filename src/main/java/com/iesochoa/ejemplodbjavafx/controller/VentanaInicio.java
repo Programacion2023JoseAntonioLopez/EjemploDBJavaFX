@@ -1,4 +1,4 @@
-package com.iesochoa.ejemplodbjavafx;
+package com.iesochoa.ejemplodbjavafx.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

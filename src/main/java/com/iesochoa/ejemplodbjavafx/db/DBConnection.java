@@ -17,8 +17,8 @@ public class DBConnection {
             CREATE DATABASE IF NOT EXISTS empresa;
             USE empresa;
                         
-            -- Crear tabla Persona
-            CREATE TABLE Persona (
+            -- Crear tabla Empleado
+            CREATE TABLE Empleado (
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 dni VARCHAR(9) NOT NULL UNIQUE,
                 nombre VARCHAR(50),
@@ -34,7 +34,7 @@ public class DBConnection {
                 codigo INT AUTO_INCREMENT PRIMARY KEY,
                 nombre VARCHAR(100),
                 jefe INT UNIQUE,
-                FOREIGN KEY (jefe) REFERENCES Persona(id)
+                FOREIGN KEY (jefe) REFERENCES Empleado(id)
                     ON DELETE SET NULL ON UPDATE CASCADE
             );
             """;
@@ -92,8 +92,8 @@ public class DBConnection {
                 (3, 'Marketing', NULL),
                 (4, 'Finanzas', NULL),
                 (5, 'Logística', NULL);
-                -- Insertar personas (jefes y empleados)
-                INSERT INTO Persona (dni, nombre, apellido, edad, departamento) VALUES
+                -- Insertar Empleados (jefes y empleados)
+                INSERT INTO Empleado (dni, nombre, apellido, edad, departamento) VALUES
                 ('12345678A', 'Laura', 'Gómez', 40, 1),  -- jefe de RRHH
                 ('23456789B', 'Carlos', 'López', 35, 2), -- jefe de Tecnología
                 ('34567890C', 'Marta', 'Pérez', 42, 3),  -- jefe de Marketing
