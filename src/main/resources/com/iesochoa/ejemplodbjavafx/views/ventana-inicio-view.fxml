@@ -1,16 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.iesochoa.ejemplodbjavafx.controller.VentanaInicio">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
-</VBox>
+<AnchorPane prefHeight="400.0" prefWidth="610.0" style="-fx-background-color: #9FEEEE;" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.joselopez.biblioteca.controller.InicioController">
+    <children>
+        <Button fx:id="btPrestamos" layoutX="28.0" layoutY="169.0" mnemonicParsing="false" onAction="#onClickPrestamos">
+            <graphic>
+                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/prestamos.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+        <Button fx:id="idSocios" layoutX="420.0" layoutY="169.0" mnemonicParsing="false" onAction="#onClickSocios" text="Empleados">
+            <graphic>
+
+                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/socios.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+        <Button fx:id="btLibros" layoutX="236.0" layoutY="169.0" mnemonicParsing="false" onAction="#onClickLibros">
+            <graphic>
+                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/book.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+        <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../images/logo.png" />
+            </image>
+        </ImageView>
+        <Button fx:id="btSalir" layoutX="527.0" layoutY="344.0" mnemonicParsing="false" onAction="#onClickSalir" prefHeight="60.0" prefWidth="56.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="25.0">
+            <graphic>
+                <ImageView fitHeight="52.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/salida.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+        <Button fx:id="btPruebaBusqueda" layoutX="60.0" layoutY="338.0" mnemonicParsing="false" onAction="#onClickPruebaBusqueda" prefHeight="34.0" prefWidth="122.0" text="Socio">
+            <font>
+                <Font size="18.0" />
+            </font>
+            <graphic>
+                <ImageView fitHeight="29.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/lupa.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+        <Label fx:id="lbPruebaBusqueda" layoutX="198.0" layoutY="349.0" text="Socio">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+    </children>
+</AnchorPane>

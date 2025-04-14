@@ -1,0 +1,22 @@
+.image-view-border {
+    -fx-padding: 10;  /* Padding around the image view */
+    -fx-border-color: black;  /* Color of the border */
+    -fx-border-width: 2;  /* Width of the border */
+    -fx-border-radius: 5;  /* Optional: rounded corners */
+    -fx-background-radius: 5;  /* Optional: rounded corners to match the border */
+}
+.prueba{
+    -fx-background-color: red;
+}
+@font-face {
+    font-family: 'Pacifico';
+    src: url('../fonts/Pacifico-Regular.ttf');
+}
+.title-label {
+        -fx-font-family: 'Pacifico';
+       -fx-font-size: 30px;           /* Tamaño de la fuente */
+       -fx-font-weight: bold;         /* Grosor de la fuente */
+       -fx-text-fill: orange;        /* Color del texto */
+     /*  -fx-padding: 10px;             *//* Relleno alrededor del texto *//*
+       -fx-alignment: center;          Alineación del texto */
+}
