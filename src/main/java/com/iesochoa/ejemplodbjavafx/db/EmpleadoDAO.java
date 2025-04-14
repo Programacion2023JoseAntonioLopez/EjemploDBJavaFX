@@ -10,15 +10,22 @@ import java.util.List;
 public class EmpleadoDAO {
 
     // Parámetros de conexión a la base de datos
-    private static final String URL = "jdbc:mysql://localhost:3306/empresa?useSSL=false&serverTimezone=UTC";
-    private static final String USER = "root";             // Cambia según tu configuración
-    private static final String PASSWORD = "tu_password";    // Cambia según tu configuración
+    public static final String INSERT_EMPLEADO = "INSERT INTO Empleado (dni, nombre, apellido, edad, departamento) VALUES (?, ?, ?, ?, ?)";
+    public static final String SELECT_EMPLEADO_POR_COD = "SELECT id, dni, nombre, apellido, edad, departamento FROM Empleado WHERE id = ?";
+    public static final String SELECT_ALL_EMPLEADOS = "SELECT id, dni, nombre, apellido, edad, departamento FROM Empleado";
+    public static final String UPDATE_EMPLEADO = "UPDATE Empleado SET dni = ?, nombre = ?, apellido = ?, edad = ?, departamento = ? WHERE id = ?";
+    public static final String DELETE_EMPLEADO = "DELETE FROM Empleado WHERE id = ?";
+    public static final String SELECT_EMPLEADOS_DEPARTAMENTO = "SELECT * FROM Empleado WHERE departamento = ?";
 
     // Instancia única de EmpleadoDAO (Singleton)
     private static volatile EmpleadoDAO instance;
+    private Connection connection;
 
     // Constructor privado para evitar instanciación externa
-    private EmpleadoDAO() { }
+    private EmpleadoDAO() {
+        // Opcionalmente, se pueden inicializar recursos aquí
+        this.connection = DBConnection.getConnection();
+    }
 
     // Método para obtener la única instancia de EmpleadoDAO
     public static EmpleadoDAO getInstance() {
@@ -32,17 +39,14 @@ public class EmpleadoDAO {
         return instance;
     }
 
-    // Método privado para obtener una conexión a la base de datos
-    private Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(URL, USER, PASSWORD);
-    }
+
 
     // CREAR: Inserta una nueva Empleado en la base de datos.
     // Este método propaga SQLException al llamador.
     public boolean createEmpleado(Empleado Empleado) throws SQLException {
-        String sql = "INSERT INTO Empleado (dni, nombre, apellido, edad, departamento) VALUES (?, ?, ?, ?, ?)";
-        try (Connection conn = getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+        String sql = INSERT_EMPLEADO;
+        try (
+             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             ps.setString(1, Empleado.getDni());
             ps.setString(2, Empleado.getNombre());
@@ -67,65 +71,67 @@ public class EmpleadoDAO {
         }
     }
 
-    // LEER: Recupera una Empleado por su ID.
-    public Empleado getEmpleado(int id) throws SQLException {
-        String sql = "SELECT id, dni, nombre, apellido, edad, departamento FROM Empleado WHERE id = ?";
-        Empleado Empleado = null;
-        try (Connection conn = getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+    // LEER: Recupera un Empleado por su ID.
+    public Empleado selectEmpleadoPorId(int id) throws SQLException {
 
+        Empleado empleado = null;
+        try (
+             PreparedStatement ps = connection.prepareStatement(SELECT_EMPLEADO_POR_COD)
+        ) {
             ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    int identificador = rs.getInt("id");
-                    String dni = rs.getString("dni");
-                    String nombre = rs.getString("nombre");
-                    String apellido = rs.getString("apellido");
-                    int edad = rs.getInt("edad");
-                    int codigoDep = rs.getInt("departamento");
-                    Departamento dep = null;
-                    if (!rs.wasNull()) {
-                        dep = new Departamento(codigoDep, "", null);
-                    }
-                    Empleado = new Empleado(identificador, dni, nombre, apellido, edad, dep);
+                    empleado = resultSetToEmpleado(rs);
                 }
             }
         }
-        return Empleado;
+        return empleado;
     }
-
-    // LEER: Recupera todas las Empleados almacenadas
+    
+    // LEER: Recupera todos los Empleados almacenados
     public List<Empleado> listAllEmpleados() throws SQLException {
         List<Empleado> lista = new ArrayList<>();
-        String sql = "SELECT id, dni, nombre, apellido, edad, departamento FROM Empleado";
-        try (Connection conn = getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql);
-             ResultSet rs = ps.executeQuery()) {
-
+       
+        try (
+                PreparedStatement ps = connection.prepareStatement(SELECT_ALL_EMPLEADOS);
+                ResultSet rs = ps.executeQuery();
+        )
+        {
             while (rs.next()) {
-                int id = rs.getInt("id");
-                String dni = rs.getString("dni");
-                String nombre = rs.getString("nombre");
-                String apellido = rs.getString("apellido");
-                int edad = rs.getInt("edad");
-                int codigoDep = rs.getInt("departamento");
-                Departamento dep = null;
-                if (!rs.wasNull()) {
-                    dep = new Departamento(codigoDep, "", null);
-                }
-                Empleado Empleado = new Empleado(id, dni, nombre, apellido, edad, dep);
+                Empleado Empleado = resultSetToEmpleado(rs);
                 lista.add(Empleado);
             }
         }
         return lista;
     }
 
-    // ACTUALIZAR: Actualiza los datos de una Empleado existente
-    public boolean updateEmpleado(Empleado Empleado) throws SQLException {
-        String sql = "UPDATE Empleado SET dni = ?, nombre = ?, apellido = ?, edad = ?, departamento = ? WHERE id = ?";
-        try (Connection conn = getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+    /**
+     * Convierte un ResultSet en un objeto Empleado
+     * @param rs:  ResultSet que contiene los datos de un Empleado
+     * @return Empleado: Objeto Empleado con los datos del ResultSet
+     * @throws SQLException
+     */
+    private static Empleado resultSetToEmpleado(ResultSet rs) throws SQLException {
+        int id = rs.getInt("id");
+        String dni = rs.getString("dni");
+        String nombre = rs.getString("nombre");
+        String apellido = rs.getString("apellido");
+        int edad = rs.getInt("edad");
+        int codigoDep = rs.getInt("departamento");
+        Departamento dep = null;
+        if (!rs.wasNull()) {
+            dep = new Departamento(codigoDep, "", null);
+        }
+        Empleado Empleado = new Empleado(id, dni, nombre, apellido, edad, dep);
+        return Empleado;
+    }
 
+    // ACTUALIZAR: Actualiza los datos de un Empleado existente
+    public boolean updateEmpleado(Empleado Empleado) throws SQLException {
+
+        try (
+             PreparedStatement ps = connection.prepareStatement(UPDATE_EMPLEADO)
+        ) {
             ps.setString(1, Empleado.getDni());
             ps.setString(2, Empleado.getNombre());
             ps.setString(3, Empleado.getApellido());
@@ -141,16 +147,36 @@ public class EmpleadoDAO {
         }
     }
 
-    // ELIMINAR: Elimina una Empleado por su ID
+    // ELIMINAR: Elimina un Empleado por su ID
     public boolean deleteEmpleado(int id) throws SQLException {
-        String sql = "DELETE FROM Empleado WHERE id = ?";
-        try (Connection conn = getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+        try (
+             PreparedStatement ps = connection.prepareStatement(DELETE_EMPLEADO)
+        ) {
 
             ps.setInt(1, id);
             int filasAfectadas = ps.executeUpdate();
             return filasAfectadas > 0;
         }
+    }
+    public ArrayList<Empleado> empleadosDepartamento(int codigoDepartamento) throws SQLException {
+        ArrayList<Empleado> empleados = new ArrayList<>();
+
+          try(
+                PreparedStatement ps = connection.prepareStatement(SELECT_EMPLEADOS_DEPARTAMENTO);
+
+                )
+          {// Crear la sentencia SQL para seleccionar empleados por departamento
+              ps.setInt(1, codigoDepartamento);
+              ResultSet rs = ps.executeQuery();
+
+            // Procesar el resultado y crear objetos Empleado
+            while (rs.next()) {
+                Empleado empleado =resultSetToEmpleado(rs);
+                empleados.add(empleado);
+            }
+        }
+        return empleados;
     }
 }
 

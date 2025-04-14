@@ -5,15 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a67fde72-2a73-46be-9c9b-565ab6bf8707" name="Changes" comment="Inicio">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/iesochoa/ejemplodbjavafx/db/DepartamentoDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/iesochoa/ejemplodbjavafx/db/EmpleadoDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/iesochoa/ejemplodbjavafx/model/Departamento.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/iesochoa/ejemplodbjavafx/model/Empleado.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/aws.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/iesochoa/ejemplodbjavafx/VentanaInicio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/iesochoa/ejemplodbjavafx/controller/VentanaInicio.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/iesochoa/ejemplodbjavafx/db/DBConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/iesochoa/ejemplodbjavafx/db/DBConnection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/iesochoa/ejemplodbjavafx/ventana-inicio-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/iesochoa/ejemplodbjavafx/ventana-inicio-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/iesochoa/ejemplodbjavafx/EjemploDBJavaFx.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/iesochoa/ejemplodbjavafx/EjemploDBJavaFx.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/iesochoa/ejemplodbjavafx/db/EmpleadoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/iesochoa/ejemplodbjavafx/db/EmpleadoDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/iesochoa/ejemplodbjavafx/model/Departamento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/iesochoa/ejemplodbjavafx/model/Departamento.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/iesochoa/ejemplodbjavafx/ventana-inicio-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/iesochoa/ejemplodbjavafx/views/ventana-inicio-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,7 +30,7 @@
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
-        <option name="mavenHome" value="Use Maven wrapper" />
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
       </MavenGeneralSettings>
     </option>
   </component>
@@ -58,6 +55,9 @@
   }
 }</component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\JoseA\Documents\temp\EjemploDBJavaFX\src\main\resources\com\iesochoa\ejemplodbjavafx\views" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.iesochoa.ejemplodbjavafx.db" />
     </key>

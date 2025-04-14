@@ -13,6 +13,12 @@ public class Departamento {
         this.nombre = nombre;
         this.jefe = jefe;
     }
+    public Departamento(int codigo, String nombre, Empleado jefe, List<Empleado> empleados) {
+        this.codigo = codigo;
+        this.nombre = nombre;
+        this.jefe = jefe;
+        this.empleados = empleados;
+    }
 
     // Getters y Setters
     public int getCodigo() { return codigo; }
