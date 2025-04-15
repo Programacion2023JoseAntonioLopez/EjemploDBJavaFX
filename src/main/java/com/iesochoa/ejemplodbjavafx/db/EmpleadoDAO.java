@@ -28,8 +28,22 @@ public class EmpleadoDAO {
     """;
     public static final String UPDATE_EMPLEADO = "UPDATE Empleado SET dni = ?, nombre = ?, apellido = ?, edad = ?, departamento = ? WHERE id = ?";
     public static final String DELETE_EMPLEADO = "DELETE FROM Empleado WHERE id = ?";
-    public static final String SELECT_EMPLEADOS_DEPARTAMENTO = "SELECT * FROM Empleado WHERE departamento = ?";
-
+    public static final String SELECT_EMPLEADOS_DEPARTAMENTO = """
+    SELECT
+                Empleado.id,
+                Empleado.dni,
+                Empleado.nombre,
+                Empleado.apellido,
+                Empleado.edad,
+                Empleado.departamento AS codigo_departamento,
+                Departamento.nombre AS nombre_departamento
+            FROM
+                Empleado  
+            LEFT JOIN
+                Departamento ON Empleado.departamento = Departamento.codigo
+            WHERE 
+                Empleado.departamento = ?;
+""";
     // Instancia única de EmpleadoDAO (Singleton)
     private static volatile EmpleadoDAO instance;
     private Connection connection;
@@ -100,10 +114,26 @@ public class EmpleadoDAO {
         }
         return empleado;
     }
-    
+    public ArrayList<Empleado> selectEmpleadosPorDepartamento(int codDepartamento) throws SQLException {
+
+        Empleado empleado = null;
+        ArrayList<Empleado> lista = new ArrayList<>();
+        try (
+                PreparedStatement ps = connection.prepareStatement(SELECT_EMPLEADOS_DEPARTAMENTO)
+        ) {
+            ps.setInt(1, codDepartamento);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Empleado Empleado = resultSetToEmpleado(rs);
+                    lista.add(Empleado);
+                }
+            }
+        }
+        return lista;
+    }
     // LEER: Recupera todos los Empleados almacenados
-    public List<Empleado> listAllEmpleados() throws SQLException {
-        List<Empleado> lista = new ArrayList<>();
+    public ArrayList<Empleado> listAllEmpleados() throws SQLException {
+        ArrayList<Empleado> lista = new ArrayList<>();
        
         try (
                 PreparedStatement ps = connection.prepareStatement(SELECT_ALL_EMPLEADOS);

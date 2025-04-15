@@ -4,23 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a67fde72-2a73-46be-9c9b-565ab6bf8707" name="Changes" comment="Dao">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/iesochoa/ejemplodbjavafx/controller/EmpleadosController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/iesochoa/ejemplodbjavafx/controller/InicioController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/iesochoa/ejemplodbjavafx/controller/PruebaController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/iesochoa/ejemplodbjavafx/views/empleados-view.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/iesochoa/ejemplodbjavafx/views/inicio-view.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/iesochoa/ejemplodbjavafx/views/prueba-view.fxml" afterDir="false" />
+    <list default="true" id="a67fde72-2a73-46be-9c9b-565ab6bf8707" name="Changes" comment="Empleado">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/iesochoa/ejemplodbjavafx/EjemploDBJavaFx.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/iesochoa/ejemplodbjavafx/EjemploDBJavaFx.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/iesochoa/ejemplodbjavafx/controller/VentanaInicio.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/iesochoa/ejemplodbjavafx/db/DBConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/iesochoa/ejemplodbjavafx/db/DBConnection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/iesochoa/ejemplodbjavafx/db/DepartamentoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/iesochoa/ejemplodbjavafx/db/DepartamentoDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/iesochoa/ejemplodbjavafx/controller/EmpleadosController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/iesochoa/ejemplodbjavafx/controller/EmpleadosController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/iesochoa/ejemplodbjavafx/db/EmpleadoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/iesochoa/ejemplodbjavafx/db/EmpleadoDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/iesochoa/ejemplodbjavafx/model/Departamento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/iesochoa/ejemplodbjavafx/model/Departamento.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/iesochoa/ejemplodbjavafx/model/Empleado.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/iesochoa/ejemplodbjavafx/model/Empleado.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/iesochoa/ejemplodbjavafx/views/ventana-inicio-view.fxml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,7 +43,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Application.EjemploDBJavaFx.executor": "Run",
+    "Application.EjemploDBJavaFx.executor": "Debug",
     "Application.HelloApplication.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -151,13 +138,22 @@
       <option name="project" value="LOCAL" />
       <updated>1744631525258</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Empleado">
+      <option name="closed" value="true" />
+      <created>1744714294548</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1744714294548</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Inicio" />
     <MESSAGE value="Dao" />
-    <option name="LAST_COMMIT_MESSAGE" value="Dao" />
+    <MESSAGE value="Empleado" />
+    <option name="LAST_COMMIT_MESSAGE" value="Empleado" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -166,6 +162,11 @@
           <url>file://$PROJECT_DIR$/src/main/java/com/iesochoa/ejemplodbjavafx/controller/InicioController.java</url>
           <line>24</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/iesochoa/ejemplodbjavafx/controller/EmpleadosController.java</url>
+          <line>119</line>
+          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

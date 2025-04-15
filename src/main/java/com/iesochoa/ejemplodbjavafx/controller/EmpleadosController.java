@@ -114,13 +114,22 @@ public class EmpleadosController implements Initializable {
         );
         cbDepartamento.getSelectionModel().select(0);
         cbDepartamento.getSelectionModel().selectedItemProperty().addListener(
-                (observableValue, departamento, t1) -> {
-                    if (t1.getCodigo() == 0) {
-                       // btSeleccionEmpleado.setDisable(true);
+                (observableValue, depAnterior, depSeleccionado) -> {
+                    ArrayList<Empleado> empleados;
+                    try {
+                    if (depSeleccionado.getCodigo() == 0) {
+                            empleados= EmpleadoDAO.getInstance().listAllEmpleados();
+
                     } else {
-                      //  btSeleccionEmpleado.setDisable(false);
+                        empleados= EmpleadoDAO.getInstance().empleadosDepartamento(depSeleccionado.getCodigo());
                     }
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                    listaEmpleados= FXCollections.observableArrayList(empleados);
+                    tvEmpleados.setItems(listaEmpleados);
                 }
+
         );
         cbDepartamento.setOnAction(event ->{
             Departamento departamento=cbDepartamento.getValue();
@@ -149,7 +158,5 @@ public class EmpleadosController implements Initializable {
             throw new RuntimeException(e);
         }
         tvEmpleados.setItems(listaEmpleados);
-
-
     }
 }
