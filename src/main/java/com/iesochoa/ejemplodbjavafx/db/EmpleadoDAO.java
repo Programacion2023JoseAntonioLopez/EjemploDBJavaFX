@@ -12,7 +12,20 @@ public class EmpleadoDAO {
     // Parámetros de conexión a la base de datos
     public static final String INSERT_EMPLEADO = "INSERT INTO Empleado (dni, nombre, apellido, edad, departamento) VALUES (?, ?, ?, ?, ?)";
     public static final String SELECT_EMPLEADO_POR_COD = "SELECT id, dni, nombre, apellido, edad, departamento FROM Empleado WHERE id = ?";
-    public static final String SELECT_ALL_EMPLEADOS = "SELECT id, dni, nombre, apellido, edad, departamento FROM Empleado";
+    public static final String SELECT_ALL_EMPLEADOS = """
+            SELECT
+                Empleado.id,
+                Empleado.dni,
+                Empleado.nombre,
+                Empleado.apellido,
+                Empleado.edad,
+                Empleado.departamento AS codigo_departamento,
+                Departamento.nombre AS nombre_departamento
+            FROM
+                Empleado
+            LEFT JOIN
+                Departamento ON Empleado.departamento = Departamento.codigo;
+    """;
     public static final String UPDATE_EMPLEADO = "UPDATE Empleado SET dni = ?, nombre = ?, apellido = ?, edad = ?, departamento = ? WHERE id = ?";
     public static final String DELETE_EMPLEADO = "DELETE FROM Empleado WHERE id = ?";
     public static final String SELECT_EMPLEADOS_DEPARTAMENTO = "SELECT * FROM Empleado WHERE departamento = ?";
@@ -50,7 +63,7 @@ public class EmpleadoDAO {
 
             ps.setString(1, Empleado.getDni());
             ps.setString(2, Empleado.getNombre());
-            ps.setString(3, Empleado.getApellido());
+            ps.setString(3, Empleado.getApellidos());
             ps.setInt(4, Empleado.getEdad());
             if (Empleado.getDepartamento() != null) {
                 ps.setInt(5, Empleado.getDepartamento().getCodigo());
@@ -117,10 +130,12 @@ public class EmpleadoDAO {
         String nombre = rs.getString("nombre");
         String apellido = rs.getString("apellido");
         int edad = rs.getInt("edad");
-        int codigoDep = rs.getInt("departamento");
+        int codigoDep = rs.getInt("codigo_departamento");
         Departamento dep = null;
         if (!rs.wasNull()) {
-            dep = new Departamento(codigoDep, "", null);
+            dep = new Departamento(codigoDep, rs.getString("nombre_departamento"), null);
+        }else {
+            dep = new Departamento(0, "Sin Departamento", null);
         }
         Empleado Empleado = new Empleado(id, dni, nombre, apellido, edad, dep);
         return Empleado;
@@ -134,7 +149,7 @@ public class EmpleadoDAO {
         ) {
             ps.setString(1, Empleado.getDni());
             ps.setString(2, Empleado.getNombre());
-            ps.setString(3, Empleado.getApellido());
+            ps.setString(3, Empleado.getApellidos());
             ps.setInt(4, Empleado.getEdad());
             if (Empleado.getDepartamento() != null) {
                 ps.setInt(5, Empleado.getDepartamento().getCodigo());

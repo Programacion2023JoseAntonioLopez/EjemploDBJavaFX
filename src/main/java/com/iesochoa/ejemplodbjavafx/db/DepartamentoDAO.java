@@ -93,8 +93,8 @@ public class DepartamentoDAO {
     }
 
     // LEER: Devuelve una lista con todos los Departamentos registrados
-    public List<Departamento> listAllDepartamentos() {
-        List<Departamento> lista = new ArrayList<>();
+    public ArrayList<Departamento> listAllDepartamentos() {
+        ArrayList<Departamento> lista = new ArrayList<>();
         String sql = "SELECT * FROM Departamento";
         try (
              PreparedStatement ps = connection.prepareStatement(sql);

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="539.0" prefWidth="796.0" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.iesochoa.ejemplodbjavafx.controller.EmpleadosController">
+    <children>
+        <ImageView fitHeight="110.0" fitWidth="135.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+        <ImageView fitHeight="86.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../images/person.png" />
+            </image>
+        </ImageView>
+        <Label layoutX="122.0" layoutY="14.0" styleClass="title-label" text="Empleados" />
+        <TableView fx:id="tvEmpleados" layoutY="145.0" prefHeight="334.0" prefWidth="796.0" AnchorPane.bottomAnchor="68.0">
+            <columns>
+
+                <TableColumn fx:id="tcId" prefWidth="40.799989342689514" text="Id" />
+            <TableColumn fx:id="tcDNI" prefWidth="108.0000228881836" text="DNI" />
+                <TableColumn fx:id="tcNombre" prefWidth="127.99995422363281" text="Nombre" />
+                <TableColumn fx:id="tcApellidos" prefWidth="204.0" text="Apellidos" />
+                <TableColumn fx:id="tcEdad" prefWidth="57.5999755859375" text="Edad" />
+                <TableColumn fx:id="tcidDep" prefWidth="59.199951171875" text="idDep" />
+            <TableColumn fx:id="tcDepartamento" maxWidth="1.7976931348623157E308" prefWidth="176.800048828125" text="Departamento" />
+
+            </columns>
+        </TableView>
+        <Label layoutX="14.0" layoutY="104.0" text="DNI" />
+        <TextField fx:id="tfNumSocio" layoutX="97.0" layoutY="99.0" prefHeight="26.0" prefWidth="104.0" />
+        <Label layoutX="208.0" layoutY="104.0" text="Nombre" />
+        <TextField fx:id="tfNombre" layoutX="299.0" layoutY="99.0" prefHeight="26.0" prefWidth="146.0" />
+        <Button fx:id="tbBaja" layoutX="619.0" layoutY="75.0" mnemonicParsing="false" onAction="#onClickbtAlta">
+            <font>
+                <Font size="14.0" />
+            </font>
+            <graphic>
+                <ImageView fx:id="btNuevo" fitHeight="49.0" fitWidth="79.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/nuevo.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+        <Button fx:id="btBuscarPorSocio" layoutX="43.0" layoutY="97.0" mnemonicParsing="false" onAction="#onClickBuscarPorSocio" prefHeight="26.0" prefWidth="26.0">
+            <graphic>
+                <ImageView fitHeight="27.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/lupa.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+        <Button fx:id="btBuscarPorNombre" layoutX="255.0" layoutY="97.0" mnemonicParsing="false" onAction="#onClickBuscarPorNombre" prefHeight="26.0" prefWidth="26.0">
+            <graphic>
+                <ImageView fitHeight="27.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/lupa.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+        <Button layoutX="688.0" layoutY="76.0" mnemonicParsing="false" onAction="#onClickSalir" prefHeight="59.0" prefWidth="64.0">
+            <graphic>
+                <ImageView fx:id="btSalir" fitHeight="52.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/salida.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+        <Button fx:id="btSeleccionEmpleado" layoutX="596.0" layoutY="485.0" mnemonicParsing="false" onAction="#onClickSeleccionSocio" text="Selección Empleado">
+            <font>
+                <Font size="18.0" />
+            </font></Button>
+      <ComboBox fx:id="cbDepartamento" layoutX="458.0" layoutY="100.0" prefWidth="150.0" />
+    </children>
+</AnchorPane>

@@ -4,7 +4,7 @@ public class Empleado {
     private int id;
     private String dni;
     private String nombre;
-    private String apellido;
+    private String apellidos;
     private int edad;
     private Departamento departamento; // Relación N a 1
 
@@ -13,7 +13,7 @@ public class Empleado {
         this.id = id;
         this.dni = dni;
         this.nombre = nombre;
-        this.apellido = apellido;
+        this.apellidos = apellido;
         this.edad = edad;
         this.departamento = departamento;
     }
@@ -28,8 +28,8 @@ public class Empleado {
     public String getNombre() { return nombre; }
     public void setNombre(String nombre) { this.nombre = nombre; }
 
-    public String getApellido() { return apellido; }
-    public void setApellido(String apellido) { this.apellido = apellido; }
+    public String getApellidos() { return apellidos; }
+    public void setApellidos(String apellidos) { this.apellidos = apellidos; }
 
     public int getEdad() { return edad; }
     public void setEdad(int edad) { this.edad = edad; }
@@ -43,7 +43,7 @@ public class Empleado {
                 "id=" + id +
                 ", dni='" + dni + '\'' +
                 ", nombre='" + nombre + '\'' +
-                ", apellido='" + apellido + '\'' +
+                ", apellido='" + apellidos + '\'' +
                 ", edad=" + edad +
                 ", departamento=" + (departamento != null ? departamento.getNombre() : "Sin asignar") +
                 '}';

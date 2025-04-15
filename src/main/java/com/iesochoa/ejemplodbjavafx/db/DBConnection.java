@@ -13,30 +13,56 @@ public class DBConnection {
     private static final String USERNAME = "admin";//"root";
     private static final String PASSWORD = "root123456";
     private static final String CREATE_DB= """
-            -- Crear la base de datos
-            CREATE DATABASE IF NOT EXISTS empresa;
-            USE empresa;
-                        
-            -- Crear tabla Empleado
-            CREATE TABLE Empleado (
-                id INT AUTO_INCREMENT PRIMARY KEY,
-                dni VARCHAR(9) NOT NULL UNIQUE,
-                nombre VARCHAR(50),
-                apellido VARCHAR(50),
-                edad INT,
-                departamento INT,
-                FOREIGN KEY (departamento) REFERENCES Departamento(codigo)
-                    ON DELETE SET NULL ON UPDATE CASCADE
-            );
-                        
-            -- Crear tabla Departamento
-            CREATE TABLE Departamento (
-                codigo INT AUTO_INCREMENT PRIMARY KEY,
-                nombre VARCHAR(100),
-                jefe INT UNIQUE,
-                FOREIGN KEY (jefe) REFERENCES Empleado(id)
-                    ON DELETE SET NULL ON UPDATE CASCADE
-            );
+              CREATE TABLE IF NOT EXISTS Departamento (
+                  codigo INT AUTO_INCREMENT PRIMARY KEY,
+                  nombre VARCHAR(100),
+                  jefe INT UNIQUE
+              );
+            
+              -- Crear tabla Empleado si no existe (sin clave foránea)
+              CREATE TABLE IF NOT EXISTS Empleado (
+                  id INT AUTO_INCREMENT PRIMARY KEY,
+                  dni VARCHAR(9) NOT NULL UNIQUE,
+                  nombre VARCHAR(50),
+                  apellido VARCHAR(50),
+                  edad INT,
+                  departamento INT
+              );
+            
+              -- Añadir clave foránea a Empleado si no existe
+              ALTER TABLE Empleado
+              ADD CONSTRAINT IF NOT EXISTS fk_empleado_departamento
+              FOREIGN KEY (departamento) REFERENCES Departamento(codigo)
+                  ON DELETE SET NULL ON UPDATE CASCADE;
+            
+              -- Añadir clave foránea a Departamento si no existe
+             CREATE TABLE IF NOT EXISTS Departamento (
+                  codigo INT AUTO_INCREMENT PRIMARY KEY,
+                  nombre VARCHAR(100),
+                  jefe INT UNIQUE
+              );
+            
+              -- Crear tabla Empleado si no existe (sin clave foránea)
+              CREATE TABLE IF NOT EXISTS Empleado (
+                  id INT AUTO_INCREMENT PRIMARY KEY,
+                  dni VARCHAR(9) NOT NULL UNIQUE,
+                  nombre VARCHAR(50),
+                  apellido VARCHAR(50),
+                  edad INT,
+                  departamento INT
+              );
+            
+              -- Añadir clave foránea a Empleado si no existe
+              ALTER TABLE Empleado
+              ADD CONSTRAINT IF NOT EXISTS fk_empleado_departamento
+              FOREIGN KEY (departamento) REFERENCES Departamento(codigo)
+                  ON DELETE SET NULL ON UPDATE CASCADE;
+            
+              -- Añadir clave foránea a Departamento si no existe
+              ALTER TABLE Departamento
+              ADD CONSTRAINT IF NOT EXISTS fk_departamento_empleado
+              FOREIGN KEY (jefe) REFERENCES Empleado(id)
+                  ON DELETE SET NULL ON UPDATE CASCADE;                                                                                         ON DELETE SET NULL ON UPDATE CASCADE;
             """;
     private static Connection connection;
 
@@ -52,8 +78,8 @@ public class DBConnection {
                     try {
                        // Establecer la conexión
                         connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-                        crearTabla(connection);
-                        crearDatosEjemplo();
+                       // crearTabla(connection);
+                        //crearDatosEjemplo();
                     } catch ( SQLException e) {
                         e.printStackTrace();
                     }
@@ -76,9 +102,9 @@ public class DBConnection {
     //crea la tabla si no existe
     private static void crearTabla(Connection conexion) throws SQLException {
         try (Statement statement = conexion.createStatement()) {
-            statement.executeUpdate(
+            /*statement.executeUpdate(
                     CREATE_DB
-            );
+            );*/
             //System.out.println("Tabla Alumno creada correctamente.");
         }
     }
@@ -89,9 +115,8 @@ public class DBConnection {
                 INSERT INTO Departamento (codigo, nombre, jefe) VALUES
                 (1, 'Recursos Humanos', NULL),
                 (2, 'Tecnología', NULL),
-                (3, 'Marketing', NULL),
-                (4, 'Finanzas', NULL),
-                (5, 'Logística', NULL);
+                (3, 'Marketing', NULL);
+                
                 -- Insertar Empleados (jefes y empleados)
                 INSERT INTO Empleado (dni, nombre, apellido, edad, departamento) VALUES
                 ('12345678A', 'Laura', 'Gómez', 40, 1),  -- jefe de RRHH

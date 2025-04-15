@@ -35,10 +35,6 @@ public class Departamento {
 
     @Override
     public String toString() {
-        return "Departamento{" +
-                "codigo=" + codigo +
-                ", nombre='" + nombre + '\'' +
-                ", jefe=" + (jefe != null ? jefe.getNombre() : "N/A") +
-                '}';
+        return codigo+"- "+nombre;
     }
 }
