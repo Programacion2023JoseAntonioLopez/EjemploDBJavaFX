@@ -5,9 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a67fde72-2a73-46be-9c9b-565ab6bf8707" name="Changes" comment="Empleado">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/iesochoa/ejemplodbjavafx/images/editar.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/iesochoa/ejemplodbjavafx/controller/EmpleadosController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/iesochoa/ejemplodbjavafx/controller/EmpleadosController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/iesochoa/ejemplodbjavafx/controller/InicioController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/iesochoa/ejemplodbjavafx/controller/InicioController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/iesochoa/ejemplodbjavafx/db/EmpleadoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/iesochoa/ejemplodbjavafx/db/EmpleadoDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/iesochoa/ejemplodbjavafx/views/empleados-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/iesochoa/ejemplodbjavafx/views/empleados-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/iesochoa/ejemplodbjavafx/views/inicio-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/iesochoa/ejemplodbjavafx/views/inicio-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,14 +47,14 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Application.EjemploDBJavaFx.executor": "Debug",
+    "Application.EjemploDBJavaFx.executor": "Run",
     "Application.HelloApplication.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/JoseA/Documents/temp/EjemploDBJavaFX/src/main/resources/com/iesochoa/ejemplodbjavafx/css",
+    "last_opened_file_path": "D:/JoseA/Documents/temp/EjemploDBJavaFX/src/main/resources/com/iesochoa/ejemplodbjavafx/images",
     "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0"
@@ -58,8 +62,8 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\JoseA\Documents\temp\EjemploDBJavaFX\src\main\resources\com\iesochoa\ejemplodbjavafx\css" />
       <recent name="D:\JoseA\Documents\temp\EjemploDBJavaFX\src\main\resources\com\iesochoa\ejemplodbjavafx\images" />
+      <recent name="D:\JoseA\Documents\temp\EjemploDBJavaFX\src\main\resources\com\iesochoa\ejemplodbjavafx\css" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\JoseA\Documents\temp\EjemploDBJavaFX\src\main\java\com\iesochoa\ejemplodbjavafx\controller" />
@@ -146,7 +150,15 @@
       <option name="project" value="LOCAL" />
       <updated>1744714294548</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Empleado">
+      <option name="closed" value="true" />
+      <created>1744716013306</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1744716013306</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -159,13 +171,8 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/iesochoa/ejemplodbjavafx/controller/InicioController.java</url>
-          <line>24</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/iesochoa/ejemplodbjavafx/controller/EmpleadosController.java</url>
-          <line>119</line>
+          <line>132</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>

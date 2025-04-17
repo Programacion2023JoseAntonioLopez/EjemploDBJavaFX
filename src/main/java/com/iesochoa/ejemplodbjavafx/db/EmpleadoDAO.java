@@ -44,6 +44,38 @@ public class EmpleadoDAO {
             WHERE 
                 Empleado.departamento = ?;
 """;
+    public static final String SELECT_EMPLEADOS_POR_NOMBRE = """
+    SELECT
+                Empleado.id,
+                Empleado.dni,
+                Empleado.nombre,
+                Empleado.apellido,
+                Empleado.edad,
+                Empleado.departamento AS codigo_departamento,
+                Departamento.nombre AS nombre_departamento
+            FROM
+                Empleado  
+            LEFT JOIN
+                Departamento ON Empleado.departamento = Departamento.codigo
+            WHERE 
+                Empleado.nombre LIKE ? OR Empleado.apellido LIKE ?;
+""";
+    public static final String SELECT_EMPLEADOS_POR_DNI = """
+    SELECT
+                Empleado.id,
+                Empleado.dni,
+                Empleado.nombre,
+                Empleado.apellido,
+                Empleado.edad,
+                Empleado.departamento AS codigo_departamento,
+                Departamento.nombre AS nombre_departamento
+            FROM
+                Empleado  
+            LEFT JOIN
+                Departamento ON Empleado.departamento = Departamento.codigo
+            WHERE 
+                Empleado.dni LIKE ?;
+""";
     // Instancia única de EmpleadoDAO (Singleton)
     private static volatile EmpleadoDAO instance;
     private Connection connection;
@@ -114,23 +146,7 @@ public class EmpleadoDAO {
         }
         return empleado;
     }
-    public ArrayList<Empleado> selectEmpleadosPorDepartamento(int codDepartamento) throws SQLException {
 
-        Empleado empleado = null;
-        ArrayList<Empleado> lista = new ArrayList<>();
-        try (
-                PreparedStatement ps = connection.prepareStatement(SELECT_EMPLEADOS_DEPARTAMENTO)
-        ) {
-            ps.setInt(1, codDepartamento);
-            try (ResultSet rs = ps.executeQuery()) {
-                while (rs.next()) {
-                    Empleado Empleado = resultSetToEmpleado(rs);
-                    lista.add(Empleado);
-                }
-            }
-        }
-        return lista;
-    }
     // LEER: Recupera todos los Empleados almacenados
     public ArrayList<Empleado> listAllEmpleados() throws SQLException {
         ArrayList<Empleado> lista = new ArrayList<>();
@@ -222,6 +238,47 @@ public class EmpleadoDAO {
             }
         }
         return empleados;
+    }
+    public ArrayList<Empleado> selectEmpleadosPorNombre(String nombre) throws SQLException {
+
+        Empleado empleado = null;
+        ArrayList<Empleado> lista = new ArrayList<>();
+        String nombreLike = "%" + nombre + "%";
+        String apellidoLike = "%" + nombre + "%";
+        try (
+                PreparedStatement ps = connection.prepareStatement(SELECT_EMPLEADOS_POR_NOMBRE)
+        ) {
+            ps.setString(1, nombreLike);
+            ps.setString(2, apellidoLike);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Empleado Empleado = resultSetToEmpleado(rs);
+                    lista.add(Empleado);
+                }
+            }
+        }
+        return lista;
+    }
+    public ArrayList<Empleado> selectEmpleadosPorDNI(String dni) throws SQLException {
+
+        Empleado empleado = null;
+        ArrayList<Empleado> lista = new ArrayList<>();
+        String dniLike = "%" + dni + "%";
+
+
+        try (
+                PreparedStatement ps = connection.prepareStatement(SELECT_EMPLEADOS_POR_DNI)
+        ) {
+            ps.setString(1, dniLike);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Empleado Empleado = resultSetToEmpleado(rs);
+                    lista.add(Empleado);
+                }
+            }
+        }
+        return lista;
     }
 }
 

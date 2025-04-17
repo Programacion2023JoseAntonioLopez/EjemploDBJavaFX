@@ -6,12 +6,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class InicioController {
+    @FXML
+    private Button btSalir;
     @FXML
     void onClickDepartamentos(ActionEvent event) {
 
@@ -41,6 +44,8 @@ public class InicioController {
 
     @FXML
     void onClickSalir(ActionEvent event) {
-
+        //obtenemos el stage actual
+        Stage stage = (Stage) btSalir.getScene().getWindow();
+        stage.close();
     }
 }

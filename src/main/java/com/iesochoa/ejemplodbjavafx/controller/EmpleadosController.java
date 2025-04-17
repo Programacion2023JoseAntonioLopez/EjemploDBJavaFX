@@ -13,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -25,7 +26,7 @@ public class EmpleadosController implements Initializable {
     private Button btBuscarPorNombre;
 
     @FXML
-    private Button btBuscarPorSocio;
+    private Button btBuscarPorDNI;
 
     @FXML
     private ImageView btNuevo;
@@ -60,51 +61,63 @@ public class EmpleadosController implements Initializable {
     private TableColumn<Empleado, String> tcDepartamento;
 
 
-
-
-
-
-
-
-
     @FXML
     private TextField tfNombre;
 
     @FXML
-    private TextField tfNumSocio;
+    private TextField tfDNI;
 
-
-
-    @FXML
-    void onClickBuscarPorNombre(ActionEvent event) {
-
-    }
-
-    @FXML
-    void onClickBuscarPorSocio(ActionEvent event) {
-
-    }
-
-    @FXML
-    void onClickSalir(ActionEvent event) {
-
-    }
-
-    @FXML
-    void onClickSeleccionSocio(ActionEvent event) {
-
-    }
-
-    @FXML
-    void onClickbtAlta(ActionEvent event) {
-
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         iniciaCbDepartamentos();
         iniciaTvEmpleados();
     }
+    @FXML
+    void onClickBuscarPorNombre(ActionEvent event) {
+        ArrayList<Empleado> empleados;
+        try {
+            String nombreBusqueda = tfNombre.getText();
+            if (!nombreBusqueda.isEmpty()) {
+                empleados = EmpleadoDAO.getInstance().selectEmpleadosPorNombre(nombreBusqueda);
+            }else{
+                empleados = EmpleadoDAO.getInstance().listAllEmpleados();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        listaEmpleados= FXCollections.observableArrayList(empleados);
+        tvEmpleados.setItems(listaEmpleados);
+    }
+
+    @FXML
+    void onClickBuscarPorDNI(ActionEvent event) {
+        ArrayList<Empleado> empleados;
+        try {
+            String dniBusqueda = tfDNI.getText();
+            if (!dniBusqueda.isEmpty()) {
+                empleados = EmpleadoDAO.getInstance().selectEmpleadosPorDNI(dniBusqueda);
+            }else{
+                empleados = EmpleadoDAO.getInstance().listAllEmpleados();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        listaEmpleados= FXCollections.observableArrayList(empleados);
+        tvEmpleados.setItems(listaEmpleados);
+    }
+
+    @FXML
+    void onClickSalir(ActionEvent event) {
+        //obtenemos el stage actual
+        Stage stage = (Stage) btBuscarPorNombre.getScene().getWindow();
+        stage.close();
+    }
+
+
+
+
+
     private void iniciaCbDepartamentos(){
         ArrayList<Departamento> departamentos = DepartamentoDAO.getInstance().listAllDepartamentos();
         Departamento todos = new Departamento(0, "Todos",null);
@@ -159,4 +172,33 @@ public class EmpleadosController implements Initializable {
         }
         tvEmpleados.setItems(listaEmpleados);
     }
+    @FXML
+    void onClickSeleccion(ActionEvent event) {
+
+    }
+    @FXML
+    void onClickbtAlta(ActionEvent event) {
+
+    }
+    @FXML
+    void onClickEditar(ActionEvent event) {
+
+    }
+    @FXML
+    void onClickBorrar(ActionEvent event) {
+        Empleado empleado=tvEmpleados.getSelectionModel().getSelectedItem();
+        if (empleado!=null){
+            try {
+                EmpleadoDAO.getInstance().deleteEmpleado(empleado.getId());
+
+                listaEmpleados= FXCollections.observableArrayList(
+                        EmpleadoDAO.getInstance().listAllEmpleados()
+                );
+                tvEmpleados.setItems(listaEmpleados);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
 }
