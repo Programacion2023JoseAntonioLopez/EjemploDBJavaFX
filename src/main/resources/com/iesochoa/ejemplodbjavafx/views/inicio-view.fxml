@@ -38,7 +38,7 @@
                 <Image url="@../images/logo.png" />
             </image>
         </ImageView>
-        <Button fx:id="btSalir" layoutX="527.0" layoutY="344.0" mnemonicParsing="false" onAction="#onClickSalir" prefHeight="60.0" prefWidth="56.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="25.0">
+        <Button fx:id="btSalir" layoutX="464.0" layoutY="332.0" mnemonicParsing="false" onAction="#onClickSalir" prefHeight="60.0" prefWidth="56.0" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="87.60000000000002">
             <graphic>
                 <ImageView fitHeight="52.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                     <image>

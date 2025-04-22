@@ -4,19 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a67fde72-2a73-46be-9c9b-565ab6bf8707" name="Changes" comment="Empleado">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/iesochoa/ejemplodbjavafx/images/add.png" afterDir="false" />
+    <list default="true" id="a67fde72-2a73-46be-9c9b-565ab6bf8707" name="Changes" comment="Departamentos">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/iesochoa/ejemplodbjavafx/controller/DepartamentoController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/iesochoa/ejemplodbjavafx/views/departamento-view.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/iesochoa/ejemplodbjavafx/controller/EmpleadoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/iesochoa/ejemplodbjavafx/controller/EmpleadoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/iesochoa/ejemplodbjavafx/controller/DepartamentosController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/iesochoa/ejemplodbjavafx/controller/DepartamentosController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/iesochoa/ejemplodbjavafx/controller/EmpleadosController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/iesochoa/ejemplodbjavafx/controller/EmpleadosController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/iesochoa/ejemplodbjavafx/controller/InicioController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/iesochoa/ejemplodbjavafx/controller/InicioController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/iesochoa/ejemplodbjavafx/controller/PruebaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/iesochoa/ejemplodbjavafx/controller/DepartamentosController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/iesochoa/ejemplodbjavafx/db/DepartamentoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/iesochoa/ejemplodbjavafx/db/DepartamentoDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/iesochoa/ejemplodbjavafx/db/EmpleadoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/iesochoa/ejemplodbjavafx/db/EmpleadoDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/iesochoa/ejemplodbjavafx/model/Empleado.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/iesochoa/ejemplodbjavafx/model/Empleado.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/iesochoa/ejemplodbjavafx/images/socios.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/iesochoa/ejemplodbjavafx/images/personas.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/iesochoa/ejemplodbjavafx/views/inicio-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/iesochoa/ejemplodbjavafx/views/inicio-view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/iesochoa/ejemplodbjavafx/views/prueba-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/iesochoa/ejemplodbjavafx/views/departamentos-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/iesochoa/ejemplodbjavafx/views/empleados-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/iesochoa/ejemplodbjavafx/views/empleados-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -179,14 +173,23 @@
       <option name="project" value="LOCAL" />
       <updated>1745317109121</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Departamentos">
+      <option name="closed" value="true" />
+      <created>1745339916124</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1745339916124</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Inicio" />
     <MESSAGE value="Dao" />
     <MESSAGE value="Empleado" />
-    <option name="LAST_COMMIT_MESSAGE" value="Empleado" />
+    <MESSAGE value="Departamentos" />
+    <option name="LAST_COMMIT_MESSAGE" value="Departamentos" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -195,6 +198,11 @@
           <url>file://$PROJECT_DIR$/src/main/java/com/iesochoa/ejemplodbjavafx/controller/EmpleadoController.java</url>
           <line>82</line>
           <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/iesochoa/ejemplodbjavafx/controller/EmpleadosController.java</url>
+          <line>82</line>
+          <option name="timeStamp" value="12" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

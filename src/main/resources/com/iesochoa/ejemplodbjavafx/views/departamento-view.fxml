@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="411.0" prefWidth="464.0" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.iesochoa.ejemplodbjavafx.controller.DepartamentoController">
+    <children>
+        <ImageView fitHeight="86.0" fitWidth="94.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../images/person.png" />
+            </image>
+        </ImageView>
+        <Label fx:id="lbTitulo" layoutX="98.0" layoutY="22.0" styleClass="title-label" text="Departamento" />
+        <Label layoutX="57.0" layoutY="157.0" styleClass="simple-label" text="Nombre" />
+
+        <TextField fx:id="tfNombre" layoutX="156.0" layoutY="159.0" prefHeight="25.0" prefWidth="218.0" />
+
+        <Button layoutX="374.0" layoutY="346.0" mnemonicParsing="false" onAction="#onClickSalir" prefHeight="59.0" prefWidth="64.0">
+            <graphic>
+                <ImageView fx:id="btSalir" fitHeight="52.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/salida.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+        <Button layoutX="294.0" layoutY="346.0" mnemonicParsing="false" onAction="#onClickGuardar" prefHeight="59.0" prefWidth="64.0">
+            <graphic>
+                <ImageView fx:id="btSalir1" fitHeight="52.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/save.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+        <Label fx:id="lbError" layoutX="40.0" layoutY="272.0" styleClass="error-label" text="Error" />
+      <Label layoutX="57.0" layoutY="118.0" styleClass="simple-label" text="Código" />
+      <Label fx:id="lbCodigo" layoutX="156.0" layoutY="118.0" styleClass="simple-label" text="000" />
+      <Label layoutX="57.0" layoutY="206.0" styleClass="simple-label" text="Jefe" />
+      <Button layoutX="112.0" layoutY="205.0" mnemonicParsing="false" onAction="#onClickBuscarJefe" prefHeight="26.0" prefWidth="26.0">
+         <graphic>
+            <ImageView fitHeight="27.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/lupa.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Label fx:id="lbJefe" layoutX="156.0" layoutY="205.0" styleClass="simple-label" text="Sin Jefe" />
+    </children>
+</AnchorPane>

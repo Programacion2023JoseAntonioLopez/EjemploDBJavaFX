@@ -80,6 +80,10 @@ public class EmpleadosController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         iniciaCbDepartamentos();
         iniciaTableViewEmpleados();
+        if(seleccionEmpleadoCallback!=null)
+            btSeleccionEmpleado.setVisible(true);
+        else
+            btSeleccionEmpleado.setVisible(false);
     }
     @FXML
     void onClickBuscarPorNombre(ActionEvent event) {
@@ -121,10 +125,6 @@ public class EmpleadosController implements Initializable {
         Stage stage = (Stage) btBuscarPorNombre.getScene().getWindow();
         stage.close();
     }
-
-
-
-
 
     private void iniciaCbDepartamentos(){
         ArrayList<Departamento> departamentos = null;
@@ -195,10 +195,7 @@ public class EmpleadosController implements Initializable {
             }
         });
     }
-    @FXML
-    void onClickSeleccion(ActionEvent event) {
 
-    }
     @FXML
     void onClickbtAlta(ActionEvent event) {
         abrirEmpleado(null);
@@ -277,4 +274,24 @@ public class EmpleadosController implements Initializable {
         }
     }
 
+//permitir la devolución de un empledo a otra ventana
+    public interface SeleccionEmpleadoCallback{
+        void onEmpleadoSelected(Empleado empleado);
+    }
+    private SeleccionEmpleadoCallback seleccionEmpleadoCallback;
+    public void setSeleccionEmpleadoCallback(SeleccionEmpleadoCallback seleccionEmpleadoCallback) {
+        this.seleccionEmpleadoCallback = seleccionEmpleadoCallback;
+        btSeleccionEmpleado.setVisible(true);
+    }
+    @FXML
+    void onClickSeleccion(ActionEvent event) {
+        Empleado empleado=tvEmpleados.getSelectionModel().getSelectedItem();
+        if (empleado!=null){
+            if (seleccionEmpleadoCallback!=null){
+                seleccionEmpleadoCallback.onEmpleadoSelected(empleado);
+            }
+            Stage stage=(Stage) tvEmpleados.getScene().getWindow();
+            stage.close();
+        }
+    }
 }
