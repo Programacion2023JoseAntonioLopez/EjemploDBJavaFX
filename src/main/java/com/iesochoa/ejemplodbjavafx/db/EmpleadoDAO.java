@@ -11,7 +11,21 @@ public class EmpleadoDAO {
 
     // Parámetros de conexión a la base de datos
     public static final String INSERT_EMPLEADO = "INSERT INTO Empleado (dni, nombre, apellido, edad, departamento) VALUES (?, ?, ?, ?, ?)";
-    public static final String SELECT_EMPLEADO_POR_COD = "SELECT id, dni, nombre, apellido, edad, departamento FROM Empleado WHERE id = ?";
+    public static final String SELECT_EMPLEADO_POR_COD = """
+            SELECT
+                Empleado.id,
+                Empleado.dni,
+                Empleado.nombre,
+                Empleado.apellido,
+                Empleado.edad,
+                Empleado.departamento AS codigo_departamento,
+                Departamento.nombre AS nombre_departamento
+            FROM
+                Empleado
+            LEFT JOIN
+                Departamento ON Empleado.departamento = Departamento.codigo
+             WHERE id = ?;
+    """;
     public static final String SELECT_ALL_EMPLEADOS = """
             SELECT
                 Empleado.id,
@@ -25,6 +39,7 @@ public class EmpleadoDAO {
                 Empleado
             LEFT JOIN
                 Departamento ON Empleado.departamento = Departamento.codigo;
+            
     """;
     public static final String UPDATE_EMPLEADO = "UPDATE Empleado SET dni = ?, nombre = ?, apellido = ?, edad = ?, departamento = ? WHERE id = ?";
     public static final String DELETE_EMPLEADO = "DELETE FROM Empleado WHERE id = ?";

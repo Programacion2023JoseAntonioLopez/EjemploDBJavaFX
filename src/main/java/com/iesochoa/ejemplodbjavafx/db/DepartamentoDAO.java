@@ -15,7 +15,25 @@ public class DepartamentoDAO {
     private static final String UPDATE_QUERY = "UPDATE Persona SET nombre = ?, apellido = ?, edad = ? WHERE dni = ?";
     private static final String DELETE_QUERY = "DELETE FROM Persona WHERE dni = ?";
     private static final String TOTAL_PERSONAS_QUERY = "SELECT COUNT(*) FROM Persona";
-
+    public static final String SELECT_ALL_DEPARTAMENTOS = """
+            SELECT
+                *                
+            FROM
+                Departamento                        
+    """;
+    public static final String SELECT_ALL_DEPARTAMENTOS_OLD = """
+            SELECT
+                Departamento.codigo,
+                Departamento.nombre,
+                Departamento.jefe,
+                Empleado.nombre AS nombre_jefe,
+                Empleado.apellido AS apellido_jefe
+                
+            FROM
+                Departamento
+            LEFT JOIN
+                Empleado ON Departamento.jefe = Empleado.id            
+    """;
     // Instancia única de la clase (Singleton)
     private static volatile DepartamentoDAO instance;
     private Connection connection;
@@ -93,27 +111,29 @@ public class DepartamentoDAO {
     }
 
     // LEER: Devuelve una lista con todos los Departamentos registrados
-    public ArrayList<Departamento> listAllDepartamentos() {
+    public ArrayList<Departamento> listAllDepartamentos() throws SQLException{
         ArrayList<Departamento> lista = new ArrayList<>();
-        String sql = "SELECT * FROM Departamento";
+
         try (
-             PreparedStatement ps = connection.prepareStatement(sql);
+             PreparedStatement ps = connection.prepareStatement(SELECT_ALL_DEPARTAMENTOS);
              ResultSet rs = ps.executeQuery()
         ) {
             while (rs.next()) {
                 int cod = rs.getInt("codigo");
                 String nombre = rs.getString("nombre");
-                int jefeId = rs.getInt("jefe");
+                //nos permite saber si es null
+                Integer jefeId =(Integer) rs.getObject("jefe");
                 Empleado jefe = null;
-                if (!rs.wasNull()) {
-                    jefe = new Empleado(jefeId, "","","",0,null); // nombre vacío como placeholder\n
+                if (jefeId!=null) {
+                    //buscamos el empleado
+                    jefe = EmpleadoDAO.getInstance().selectEmpleadoPorId(jefeId);
                 }
                 Departamento dept = new Departamento(cod, nombre, jefe);
                 lista.add(dept);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        } /*catch (SQLException e) {
+            throw new RuntimeException(e);
+        }*/
         return lista;
     }
 

@@ -17,7 +17,24 @@ public class InicioController {
     private Button btSalir;
     @FXML
     void onClickDepartamentos(ActionEvent event) {
+//es necesario el control de excepciones
+        try{
+            //cargamos la escena desde el recurso
+            FXMLLoader loader=new FXMLLoader(EjemploDBJavaFx.class.getResource("views/departamentos-view.fxml"));
 
+            Parent root=loader.load();
+
+            Scene scene=new Scene(root);
+            //iniciamos nuevo stage en forma modal con la scene
+            Stage stage=new Stage();
+            stage.setTitle("IES Severos Ochoa/Departamentos");
+            stage.setResizable(false);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(scene);
+            stage.showAndWait();
+        }catch (IOException e){
+            System.err.println(e.getMessage());
+        }
     }
 
     @FXML

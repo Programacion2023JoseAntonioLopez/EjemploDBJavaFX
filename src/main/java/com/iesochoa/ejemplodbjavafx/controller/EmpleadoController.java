@@ -111,18 +111,24 @@ public class EmpleadoController implements Initializable {
     }
 
     private void iniciaCbDepartamentos() {
-        ArrayList<Departamento> departamentos = DepartamentoDAO.getInstance().listAllDepartamentos();
-        Departamento todos = new Departamento(0, "Sin Departamento", null);
-        departamentos.add(0, todos);
-        departamentos.forEach(
-                departamento -> cbDepartamento.getItems().add(departamento)
-        );
-        cbDepartamento.getSelectionModel().select(0);
+        ArrayList<Departamento> departamentos = null;
+        try {
+            departamentos = DepartamentoDAO.getInstance().listAllDepartamentos();
+            Departamento todos = new Departamento(0, "Sin Departamento", null);
+            departamentos.add(0, todos);
+            departamentos.forEach(
+                    departamento -> cbDepartamento.getItems().add(departamento)
+            );
+            cbDepartamento.getSelectionModel().select(0);
 
-        cbDepartamento.setOnAction(event -> {
-            Departamento departamento = cbDepartamento.getValue();
-            /* echo: por terminar*/
-        });
+            cbDepartamento.setOnAction(event -> {
+                Departamento departamento = cbDepartamento.getValue();
+                /* echo: por terminar*/
+            });
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     public Empleado getEmpleado() {

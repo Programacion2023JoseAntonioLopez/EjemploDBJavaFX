@@ -25,7 +25,7 @@
 
                 <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../images/socios.png" />
+                        <Image url="@../images/personas.png" />
                     </image>
                 </ImageView>
             </graphic>

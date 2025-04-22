@@ -15,6 +15,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
@@ -125,35 +127,41 @@ public class EmpleadosController implements Initializable {
 
 
     private void iniciaCbDepartamentos(){
-        ArrayList<Departamento> departamentos = DepartamentoDAO.getInstance().listAllDepartamentos();
-        Departamento todos = new Departamento(0, "Todos",null);
-        departamentos.add(0, todos);
-        departamentos.forEach(
-                departamento -> cbDepartamento.getItems().add(departamento)
-        );
-        cbDepartamento.getSelectionModel().select(0);
-        cbDepartamento.getSelectionModel().selectedItemProperty().addListener(
-                (observableValue, depAnterior, depSeleccionado) -> {
-                    ArrayList<Empleado> empleados;
-                    try {
-                    if (depSeleccionado.getCodigo() == 0) {
-                            empleados= EmpleadoDAO.getInstance().listAllEmpleados();
+        ArrayList<Departamento> departamentos = null;
+        try {
+            departamentos = DepartamentoDAO.getInstance().listAllDepartamentos();
+            Departamento todos = new Departamento(0, "Todos",null);
+            departamentos.add(0, todos);
+            departamentos.forEach(
+                    departamento -> cbDepartamento.getItems().add(departamento)
+            );
+            cbDepartamento.getSelectionModel().select(0);
+            cbDepartamento.getSelectionModel().selectedItemProperty().addListener(
+                    (observableValue, depAnterior, depSeleccionado) -> {
+                        ArrayList<Empleado> empleados;
+                        try {
+                            if (depSeleccionado.getCodigo() == 0) {
+                                empleados= EmpleadoDAO.getInstance().listAllEmpleados();
 
-                    } else {
-                        empleados= EmpleadoDAO.getInstance().empleadosDepartamento(depSeleccionado.getCodigo());
+                            } else {
+                                empleados= EmpleadoDAO.getInstance().empleadosDepartamento(depSeleccionado.getCodigo());
+                            }
+                        } catch (SQLException e) {
+                            throw new RuntimeException(e);
+                        }
+                        listaEmpleados= FXCollections.observableArrayList(empleados);
+                        tvEmpleados.setItems(listaEmpleados);
                     }
-                    } catch (SQLException e) {
-                        throw new RuntimeException(e);
-                    }
-                    listaEmpleados= FXCollections.observableArrayList(empleados);
-                    tvEmpleados.setItems(listaEmpleados);
-                }
 
-        );
-        cbDepartamento.setOnAction(event ->{
-            Departamento departamento=cbDepartamento.getValue();
-            /* echo: por terminar*/
-        });
+            );
+            cbDepartamento.setOnAction(event ->{
+                Departamento departamento=cbDepartamento.getValue();
+                /* echo: por terminar*/
+            });
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+
     }
     private void iniciaTableViewEmpleados(){
         /*echo: por terminar*/
@@ -174,7 +182,7 @@ public class EmpleadosController implements Initializable {
         try {
             listaEmpleados.addAll(EmpleadoDAO.getInstance().listAllEmpleados());
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.err.println(e.getMessage());
         }
         tvEmpleados.setItems(listaEmpleados);
         //asignamos evento de doble click
@@ -203,20 +211,35 @@ public class EmpleadosController implements Initializable {
     }
     @FXML
     void onClickBorrar(ActionEvent event) {
+
         Empleado empleado=tvEmpleados.getSelectionModel().getSelectedItem();
         if (empleado!=null){
-            try {
-                EmpleadoDAO.getInstance().deleteEmpleado(empleado.getId());
+            Alert alert=new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Borrar Empleado");
+            alert.setHeaderText("Borrar Empleado");
+            alert.setContentText("¿Está seguro de borrar el empleado "+empleado.getNombre()+" "+empleado.getApellidos()+"?");
+            alert.showAndWait().ifPresent(response -> {
+                if (response == ButtonType.OK) {
+                    borrarEmpleado(empleado);
+                }
+            });
 
-                listaEmpleados= FXCollections.observableArrayList(
-                        EmpleadoDAO.getInstance().listAllEmpleados()
-                );
-                tvEmpleados.setItems(listaEmpleados);
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
         }
     }
+
+    private void borrarEmpleado(Empleado empleado) {
+        try {
+            EmpleadoDAO.getInstance().deleteEmpleado(empleado.getId());
+
+            listaEmpleados= FXCollections.observableArrayList(
+                    EmpleadoDAO.getInstance().listAllEmpleados()
+            );
+            tvEmpleados.setItems(listaEmpleados);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     private void abrirEmpleado(Empleado empleado) {
         //es necesario el control de excepciones
         try{
