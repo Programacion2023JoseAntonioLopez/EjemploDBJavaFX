@@ -1,5 +1,6 @@
 package com.iesochoa.ejemplodbjavafx.controller;
 
+import com.iesochoa.ejemplodbjavafx.EjemploDBJavaFx;
 import com.iesochoa.ejemplodbjavafx.db.DepartamentoDAO;
 import com.iesochoa.ejemplodbjavafx.db.EmpleadoDAO;
 import com.iesochoa.ejemplodbjavafx.model.Departamento;
@@ -9,12 +10,17 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -71,7 +77,7 @@ public class EmpleadosController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         iniciaCbDepartamentos();
-        iniciaTvEmpleados();
+        iniciaTableViewEmpleados();
     }
     @FXML
     void onClickBuscarPorNombre(ActionEvent event) {
@@ -149,7 +155,7 @@ public class EmpleadosController implements Initializable {
             /* echo: por terminar*/
         });
     }
-    private void iniciaTvEmpleados(){
+    private void iniciaTableViewEmpleados(){
         /*echo: por terminar*/
         listaEmpleados= FXCollections.observableArrayList();
 
@@ -171,6 +177,15 @@ public class EmpleadosController implements Initializable {
             throw new RuntimeException(e);
         }
         tvEmpleados.setItems(listaEmpleados);
+        //asignamos evento de doble click
+        tvEmpleados.setOnMouseClicked(event -> {
+            System.out.println(event.getClickCount());
+            if (event.getClickCount() == 2 ) {
+                Empleado empleado = tvEmpleados.getSelectionModel().getSelectedItem();
+                abrirEmpleado(empleado);
+
+            }
+        });
     }
     @FXML
     void onClickSeleccion(ActionEvent event) {
@@ -178,11 +193,13 @@ public class EmpleadosController implements Initializable {
     }
     @FXML
     void onClickbtAlta(ActionEvent event) {
-
+        abrirEmpleado(null);
     }
     @FXML
     void onClickEditar(ActionEvent event) {
-
+        Empleado empleado = tvEmpleados.getSelectionModel().getSelectedItem();
+        if(empleado!=null)
+            abrirEmpleado(empleado);
     }
     @FXML
     void onClickBorrar(ActionEvent event) {
@@ -198,6 +215,42 @@ public class EmpleadosController implements Initializable {
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
+        }
+    }
+    private void abrirEmpleado(Empleado empleado) {
+        //es necesario el control de excepciones
+        try{
+            //cargamos la escena desde el recurso
+            FXMLLoader loader=new FXMLLoader(EjemploDBJavaFx.class.getResource("views/empleado-view.fxml"));
+            Parent root=loader.load();
+
+            EmpleadoController empleadoController=loader.getController();
+            //si es null será nuevo Socio en otro caso actualización
+            empleadoController.initialize(empleado);
+
+            Scene scene=new Scene(root);
+            //iniciamos nuevo stage en forma modal con la scene
+            Stage stage=new Stage();
+            if(empleado==null)
+                stage.setTitle("Alta de Empleado");
+            else
+                stage.setTitle("Empleado: "+empleado.getNombre()+" "+empleado.getApellidos());
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initOwner(btBuscarPorNombre.getScene().getWindow());
+            stage.setResizable(false);
+            stage.setOnHidden(event -> {
+                //cerramos el stage y actualizamos la lista
+                try {
+                    tvEmpleados.setItems(FXCollections.observableArrayList(EmpleadoDAO.getInstance().listAllEmpleados()));
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+            stage.setScene(scene);
+            stage.showAndWait();
+
+        }catch (IOException e){
+            System.err.println(e.getMessage());
         }
     }
 

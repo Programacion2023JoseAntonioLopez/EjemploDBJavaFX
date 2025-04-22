@@ -76,6 +76,22 @@ public class EmpleadoDAO {
             WHERE 
                 Empleado.dni LIKE ?;
 """;
+    public static final String SELECT_EMPLEADO_POR_DNI = """
+    SELECT
+                Empleado.id,
+                Empleado.dni,
+                Empleado.nombre,
+                Empleado.apellido,
+                Empleado.edad,
+                Empleado.departamento AS codigo_departamento,
+                Departamento.nombre AS nombre_departamento
+            FROM
+                Empleado  
+            LEFT JOIN
+                Departamento ON Empleado.departamento = Departamento.codigo
+            WHERE 
+                Empleado.dni = ?;
+""";
     // Instancia única de EmpleadoDAO (Singleton)
     private static volatile EmpleadoDAO instance;
     private Connection connection;
@@ -279,6 +295,24 @@ public class EmpleadoDAO {
             }
         }
         return lista;
+    }
+    public Empleado selectEmpleadoPorDNI(String dni) throws SQLException {
+
+        Empleado empleado = null;
+
+        try (
+                PreparedStatement ps = connection.prepareStatement(SELECT_EMPLEADO_POR_DNI)
+        ) {
+            ps.setString(1, dni);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    empleado = resultSetToEmpleado(rs);
+
+                }
+            }
+        }
+        return empleado;
     }
 }
 

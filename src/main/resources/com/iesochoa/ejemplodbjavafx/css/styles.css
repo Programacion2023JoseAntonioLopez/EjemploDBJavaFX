@@ -20,3 +20,19 @@
      /*  -fx-padding: 10px;             *//* Relleno alrededor del texto *//*
        -fx-alignment: center;          Alineación del texto */
 }
+.simple-label {
+        -fx-font-family: 'Pacifico';
+       -fx-font-size: 20px;           /* Tamaño de la fuente */
+       -fx-font-weight: bold;         /* Grosor de la fuente */
+      /* -fx-text-fill: orange;*/        /* Color del texto */
+     /*  -fx-padding: 10px;             *//* Relleno alrededor del texto *//*
+       -fx-alignment: center;          Alineación del texto */
+}
+.error-label {
+        -fx-font-family: 'Pacifico';
+       -fx-font-size: 12px;           /* Tamaño de la fuente */
+       /*-fx-font-weight: bold;*/         /* Grosor de la fuente */
+       -fx-text-fill: red;        /* Color del texto */
+     /*  -fx-padding: 10px;             *//* Relleno alrededor del texto *//*
+       -fx-alignment: center;          Alineación del texto */
+}
