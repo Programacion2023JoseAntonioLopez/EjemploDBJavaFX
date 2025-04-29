@@ -1,5 +1,8 @@
 package com.iesochoa.ejemplodbjavafx.model;
-
+/**
+ * La clase {@code Empleado} representa a un empleado en el sistema.
+ * Contiene información personal del empleado y su relación con un departamento.
+ */
 public class Empleado {
     private int id;
     private String dni;
