@@ -14,55 +14,33 @@ public class DBConnection {
     private static final String PASSWORD = "root123456";
     private static final String CREATE_DB= """
               CREATE TABLE IF NOT EXISTS Departamento (
-                  codigo INT AUTO_INCREMENT PRIMARY KEY,
-                  nombre VARCHAR(100),
-                  jefe INT UNIQUE
-              );
-            
-              -- Crear tabla Empleado si no existe (sin clave foránea)
-              CREATE TABLE IF NOT EXISTS Empleado (
-                  id INT AUTO_INCREMENT PRIMARY KEY,
-                  dni VARCHAR(9) NOT NULL UNIQUE,
-                  nombre VARCHAR(50),
-                  apellido VARCHAR(50),
-                  edad INT,
-                  departamento INT
-              );
-            
-              -- Añadir clave foránea a Empleado si no existe
-              ALTER TABLE Empleado
-              ADD CONSTRAINT IF NOT EXISTS fk_empleado_departamento
-              FOREIGN KEY (departamento) REFERENCES Departamento(codigo)
-                  ON DELETE SET NULL ON UPDATE CASCADE;
-            
-              -- Añadir clave foránea a Departamento si no existe
-             CREATE TABLE IF NOT EXISTS Departamento (
-                  codigo INT AUTO_INCREMENT PRIMARY KEY,
-                  nombre VARCHAR(100),
-                  jefe INT UNIQUE
-              );
-            
-              -- Crear tabla Empleado si no existe (sin clave foránea)
-              CREATE TABLE IF NOT EXISTS Empleado (
-                  id INT AUTO_INCREMENT PRIMARY KEY,
-                  dni VARCHAR(9) NOT NULL UNIQUE,
-                  nombre VARCHAR(50),
-                  apellido VARCHAR(50),
-                  edad INT,
-                  departamento INT
-              );
-            
-              -- Añadir clave foránea a Empleado si no existe
-              ALTER TABLE Empleado
-              ADD CONSTRAINT IF NOT EXISTS fk_empleado_departamento
-              FOREIGN KEY (departamento) REFERENCES Departamento(codigo)
-                  ON DELETE SET NULL ON UPDATE CASCADE;
-            
-              -- Añadir clave foránea a Departamento si no existe
-              ALTER TABLE Departamento
-              ADD CONSTRAINT IF NOT EXISTS fk_departamento_empleado
-              FOREIGN KEY (jefe) REFERENCES Empleado(id)
-                  ON DELETE SET NULL ON UPDATE CASCADE;                                                                                         ON DELETE SET NULL ON UPDATE CASCADE;
+               codigo INT AUTO_INCREMENT PRIMARY KEY,
+               nombre VARCHAR(100),
+               jefe INT UNIQUE
+           );
+
+           -- Crear tabla Empleado si no existe (sin clave foránea)
+           CREATE TABLE IF NOT EXISTS Empleado (
+               id INT AUTO_INCREMENT PRIMARY KEY,
+               dni VARCHAR(9) NOT NULL UNIQUE,
+               nombre VARCHAR(50),
+               apellido VARCHAR(50),
+               edad INT,
+               departamento INT
+           );
+
+           -- Añadir clave foránea a Empleado si no existe
+           ALTER TABLE Empleado
+           ADD CONSTRAINT  fk_empleado_departamento
+           FOREIGN KEY (departamento) REFERENCES Departamento(codigo)
+               ON DELETE SET NULL ON UPDATE CASCADE;
+          
+
+           -- Añadir clave foránea a Departamento si no existe
+           ALTER TABLE Departamento
+           ADD CONSTRAINT fk_departamento_empleado
+           FOREIGN KEY (jefe) REFERENCES Empleado(id)
+               ON DELETE SET NULL ON UPDATE CASCADE;                                                                                     ON DELETE SET NULL ON UPDATE CASCADE;
             """;
     private static Connection connection;
 

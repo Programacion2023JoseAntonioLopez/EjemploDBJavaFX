@@ -292,14 +292,14 @@ public class EmpleadosController implements Initializable {
         // para acceder a la propiedad anidada 'departamento' y luego a 'codigo'.
         tcidDep.setCellValueFactory(
                 param -> new ReadOnlyObjectWrapper<>(
-                        param.getValue().getDepartamento() != null ? param.getValue().getDepartamento().getCodigo() : null
+                        param.getValue().getDepartamento() != null ? param.getValue().getDepartamento().getCodigo() : 0
                 )
         );
         // Para mostrar el nombre del departamento, se utiliza una función lambda
         // para acceder a la propiedad anidada 'departamento' y luego a 'nombre'.
         tcDepartamento.setCellValueFactory(
                 param -> new ReadOnlyObjectWrapper<>(
-                        param.getValue().getDepartamento() != null ? param.getValue().getDepartamento().getNombre() : "")
+                        param.getValue().getDepartamento() != null ? param.getValue().getDepartamento().getNombre() : "Sin departamento")
         );
         try {
             // Carga todos los empleados desde la base de datos y los añade a la lista observable.
